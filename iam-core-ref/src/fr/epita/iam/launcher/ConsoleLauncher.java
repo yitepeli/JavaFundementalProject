@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.logging.*;
 
 import fr.epita.iam.business.*;
+import fr.epita.iam.datamodel.Identity;
 import fr.epita.iam.services.IdentityJDBCDAO;
 
 /**
@@ -30,6 +31,7 @@ public class ConsoleLauncher {
 		
 		//authentication
 		if (!authenticate(scanner)){
+			System.out.println("Athentication was not successful");
 			end(scanner);
 			return;
 		}
@@ -47,6 +49,7 @@ public class ConsoleLauncher {
 			//Create
 			CreateActivity.execute(scanner);
 			break;
+			
 		case "b":
 			UpdateActivity.execute(scanner);
 			break;
@@ -57,6 +60,15 @@ public class ConsoleLauncher {
 			
 		case "d":
 			//Quit
+			IdentityJDBCDAO dao = new IdentityJDBCDAO();
+			try {
+				for(Identity i:dao.readAllIdentities()){
+					System.out.println(i);
+				}
+			} catch (SQLException e) {
+				logger.log(Level.WARNING, "Warning", e);
+			}
+			end(scanner);
 			break;
 			
 		default:
@@ -66,7 +78,6 @@ public class ConsoleLauncher {
 
 		}
 		while(!"d".equals(choice));
-		end(scanner);
 		
 	}
 
