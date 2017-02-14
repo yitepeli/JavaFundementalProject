@@ -1,5 +1,5 @@
 # JavaFundementalProject
 
-Everything is in i-am-core folder.
+Everything is in iam-core-ref folder.
 
 ### Yasin Tepeli
