@@ -4,6 +4,7 @@
 package fr.epita.iam.services;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,6 +65,35 @@ public class IdentityJDBCDAO {
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "Warning", e);
 		}
+	}
+	
+	public void checkTable(){
+		DatabaseMetaData md;
+		ResultSet rs;
+		try {
+			Connection connection = getConnection("TBR");
+			md = connection.getMetaData();
+			rs = md.getTables("TBR", null, "IDENTITIES", new String[] {"TABLE"});
+			rs.next();
+			if (rs.next()) {
+				
+			}
+			else{
+				PreparedStatement statement = connection.prepareStatement("CREATE TABLE IDENTITIES (IDENTITY_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY CONSTRAINT IDENTITY_PK PRIMARY KEY, "
+						+ "IDENTITY_DISPLAYNAME VARCHAR(255),"
+						+ "IDENTITY_EMAIL VARCHAR(255),"
+						+ "IDENTITY_BIRTHDATE DATE,"
+						+ "IDENTITY_PASSWORD VARCHAR(25))");
+				statement.execute();
+				statement.close();
+			}
+		} catch (SQLException e) {
+			logger.log(Level.WARNING, "Warning", e);
+		}
+		
+			
+		
+		
 	}
 
 	/**

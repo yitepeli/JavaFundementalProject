@@ -45,9 +45,6 @@ public class CreateActivity {
 		}
 		Identity identity = new Identity("",displayName, email, pass);
 		
-	
-		//persist the identity somewhere
-		System.out.println("this is the identity you created");
 		FileIdentityDAO identityWriter = new FileIdentityDAO("tests.txt");
 		identityWriter.write(identity);
 		IdentityJDBCDAO dao = new IdentityJDBCDAO();

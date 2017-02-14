@@ -28,7 +28,8 @@ public class ConsoleLauncher {
 	public static void main(String[] args) {
 		System.out.println("Welcome to the IAM software");
 		Scanner scanner = new Scanner(System.in);
-		
+		IdentityJDBCDAO dao = new IdentityJDBCDAO();
+		dao.checkTable();
 		//authentication
 		if (!authenticate(scanner)){
 			System.out.println("Athentication was not successful");
@@ -60,7 +61,7 @@ public class ConsoleLauncher {
 			
 		case "d":
 			//Quit
-			IdentityJDBCDAO dao = new IdentityJDBCDAO();
+			dao = new IdentityJDBCDAO();
 			try {
 				for(Identity i:dao.readAllIdentities()){
 					System.out.println(i);

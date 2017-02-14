@@ -1,5 +1,5 @@
 ---------IDENTITY:BEGIN-------
-justident
-justident@gmail.com
+Seyma
+seyma@gmail.com
 
 ---------IDENTITY:END---------
